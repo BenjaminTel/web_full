@@ -68,6 +68,4 @@ public class UserService implements UserDetailsService {
         return jwtTokenProvider.generateToken(authentication);
 
     }
-
-
 }
