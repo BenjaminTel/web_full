@@ -2,6 +2,7 @@ package com.m2ibank.config.security;
 
 import com.m2ibank.config.jwt.JwtAuthenticationEntryPoint;
 import com.m2ibank.config.jwt.JwtRequestFilter;
+import com.m2ibank.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -22,9 +23,12 @@ public class SecurityConfig {
 
     private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
 
+    private final UserService userService;
+
     @Autowired
-    public SecurityConfig(JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint) {
+    public SecurityConfig(JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint, UserService userService) {
         this.jwtAuthenticationEntryPoint = jwtAuthenticationEntryPoint;
+        this.userService = userService;
     }
 
     @Bean
@@ -32,14 +36,12 @@ public class SecurityConfig {
         return new BCryptPasswordEncoder();
     }
 
-
     @Autowired
     private AuthenticationConfiguration authenticationConfiguration;
 
-
     @Bean
-    public JwtRequestFilter jwtRequestFilter() {
-        return new JwtRequestFilter();
+    public JwtRequestFilter jwtRequestFilter(UserService userService) {
+        return new JwtRequestFilter(userService);
     }
 
     @Bean
@@ -61,7 +63,7 @@ public class SecurityConfig {
                         .anyRequest().authenticated()
                 )
                 .exceptionHandling(exception -> exception.authenticationEntryPoint(jwtAuthenticationEntryPoint))
-                .addFilterBefore(jwtRequestFilter(), UsernamePasswordAuthenticationFilter.class);
+                .addFilterBefore(jwtRequestFilter(userService), UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
 
