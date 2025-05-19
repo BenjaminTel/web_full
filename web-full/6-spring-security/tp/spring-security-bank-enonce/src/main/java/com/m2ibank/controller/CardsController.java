@@ -8,12 +8,13 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping("/api/cards")
 public class CardsController {
 
     @Autowired
     private CardsRepository cardsRepository;
 
-    @GetMapping("/myCards")
+    @GetMapping
     public List<Cards> getCardDetails(@RequestParam int id) {
         List<Cards> cards = cardsRepository.findByCustomerId(id);
         if (cards != null ) {
@@ -23,7 +24,7 @@ public class CardsController {
         }
     }
 
-    @PostMapping("/createCard")
+    @PostMapping
     public Cards createCard(@RequestBody Cards card) {
 
         return cardsRepository.save(card);

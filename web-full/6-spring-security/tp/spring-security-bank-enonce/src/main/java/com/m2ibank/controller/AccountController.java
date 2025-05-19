@@ -8,12 +8,13 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping("/api/account")
 public class AccountController {
 
     @Autowired
     private AccountsRepository accountsRepository;
 
-    @GetMapping("/myAccount")
+    @GetMapping
     public List <Accounts> getAccountDetails(@RequestParam int id) {
        List<Accounts> accounts = accountsRepository.findByCustomerId(id);
         if (accounts != null ) {
@@ -23,8 +24,7 @@ public class AccountController {
         }
     }
 
-
-    @PostMapping("/createAccount")
+    @PostMapping
     public Accounts createAccount(@RequestBody Accounts account) {
         return accountsRepository.save(account);
     }

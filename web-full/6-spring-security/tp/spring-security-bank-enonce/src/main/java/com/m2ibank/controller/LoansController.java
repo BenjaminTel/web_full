@@ -8,12 +8,13 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping("/api/loans")
 public class LoansController {
 
     @Autowired
     private LoanRepository loanRepository;
 
-    @GetMapping("/myLoans")
+    @GetMapping
     public List<Loans> getLoanDetails(@RequestParam int id) {
         List<Loans> loans = loanRepository.findByCustomerIdOrderByStartDtDesc(id);
         if (loans != null ) {
@@ -23,7 +24,7 @@ public class LoansController {
         }
     }
 
-    @PostMapping("/createLoan")
+    @PostMapping
     public Loans createLoan(@RequestBody Loans loan) {
         return loanRepository.save(loan);
     }

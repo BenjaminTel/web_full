@@ -8,12 +8,13 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping("/api/balance")
 public class BalanceController {
 
     @Autowired
     private AccountTransactionsRepository accountTransactionsRepository;
 
-    @GetMapping("/myBalance")
+    @GetMapping
     public List<AccountTransactions> getBalanceDetails(@RequestParam int id) {
         List<AccountTransactions> accountTransactions = accountTransactionsRepository.
                 findByCustomerIdOrderByTransactionDtDesc(id);
@@ -24,7 +25,7 @@ public class BalanceController {
         }
     }
 
-    @PostMapping("/createTransaction")
+    @PostMapping
     public AccountTransactions createTransaction(@RequestBody AccountTransactions accountTransaction) {
         return accountTransactionsRepository.save(accountTransaction);
     }

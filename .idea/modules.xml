@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/web-full/6-spring-security/tp/spring-security-bank-enonce/spring-security-m2ibank.iml" filepath="$PROJECT_DIR$/web-full/6-spring-security/tp/spring-security-bank-enonce/spring-security-m2ibank.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/ynov-m1.iml" filepath="$PROJECT_DIR$/.idea/ynov-m1.iml" />
+    </modules>
+  </component>
+</project>
