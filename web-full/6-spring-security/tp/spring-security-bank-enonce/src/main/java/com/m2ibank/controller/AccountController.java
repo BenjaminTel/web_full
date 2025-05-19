@@ -14,7 +14,7 @@ public class AccountController {
     @Autowired
     private AccountsRepository accountsRepository;
 
-    @GetMapping
+    @GetMapping("/myAccount")
     public List <Accounts> getAccountDetails(@RequestParam int id) {
        List<Accounts> accounts = accountsRepository.findByCustomerId(id);
         if (accounts != null ) {
@@ -24,7 +24,7 @@ public class AccountController {
         }
     }
 
-    @PostMapping
+    @PostMapping("/createAccount")
     public Accounts createAccount(@RequestBody Accounts account) {
         return accountsRepository.save(account);
     }

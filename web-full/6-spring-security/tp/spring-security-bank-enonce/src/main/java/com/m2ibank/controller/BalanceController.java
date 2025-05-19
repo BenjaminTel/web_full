@@ -14,7 +14,7 @@ public class BalanceController {
     @Autowired
     private AccountTransactionsRepository accountTransactionsRepository;
 
-    @GetMapping
+    @GetMapping("/myBalance")
     public List<AccountTransactions> getBalanceDetails(@RequestParam int id) {
         List<AccountTransactions> accountTransactions = accountTransactionsRepository.
                 findByCustomerIdOrderByTransactionDtDesc(id);
@@ -25,7 +25,7 @@ public class BalanceController {
         }
     }
 
-    @PostMapping
+    @PostMapping("/createTransaction")
     public AccountTransactions createTransaction(@RequestBody AccountTransactions accountTransaction) {
         return accountTransactionsRepository.save(accountTransaction);
     }
