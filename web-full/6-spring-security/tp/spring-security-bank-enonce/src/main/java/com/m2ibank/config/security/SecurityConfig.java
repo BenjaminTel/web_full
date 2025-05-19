@@ -40,7 +40,7 @@ public class SecurityConfig {
     private AuthenticationConfiguration authenticationConfiguration;
 
     @Bean
-    public JwtRequestFilter jwtRequestFilter(UserService userService) {
+    public JwtRequestFilter jwtRequestFilter() {
         return new JwtRequestFilter(userService);
     }
 
@@ -63,7 +63,7 @@ public class SecurityConfig {
                         .anyRequest().authenticated()
                 )
                 .exceptionHandling(exception -> exception.authenticationEntryPoint(jwtAuthenticationEntryPoint))
-                .addFilterBefore(jwtRequestFilter(userService), UsernamePasswordAuthenticationFilter.class);
+                .addFilterBefore(jwtRequestFilter(), UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
 
